@@ -1,4 +1,5 @@
-if (typeof elements !== "undefined") {
+runAfterLoad(function() {
+
     elements.code_element = {
         color: "#00ffcc",
         behavior: behaviors.WALL,
@@ -7,10 +8,11 @@ if (typeof elements !== "undefined") {
 
         tick(pixel) {
             if (!pixel.code) return;
+
             try {
                 new Function("pixel", pixel.code)(pixel);
             } catch (e) {
-                console.log(e);
+                console.log("Code error:", e);
             }
         },
 
@@ -23,4 +25,5 @@ if (typeof elements !== "undefined") {
             pixel.code = elements.code_element.customCode || "";
         }
     };
-}
+
+});
